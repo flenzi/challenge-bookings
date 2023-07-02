@@ -1,8 +1,8 @@
 package f.l.challenge.dto;
 
 public enum BookingTypeEnum {
-    BOOKING(0),
-    BLOCK(1);
+    BOOKING(1),
+    BLOCK(2);
 
     private final int value;
 

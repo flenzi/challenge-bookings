@@ -6,7 +6,8 @@ INSERT INTO users (id, name) VALUES
 INSERT INTO properties (id, name, city) VALUES
     (1, 'Hotel the moon', 'San Francisco'),
     (2, 'Spa Mr Francisco', 'San Francisco'),
-    (3, 'The best place to relax', 'Oakland');
+    (3, 'The best place to relax', 'Oakland'),
+    (99, 'Hotel costa del sol', 'Malaga');
 
 
 INSERT INTO bookings (id, user_id, from_date, to_date, property_id, booking_type) VALUES

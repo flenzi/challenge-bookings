@@ -7,5 +7,5 @@ import java.util.List;
 public interface BookingEntityDAO extends EntityDAO<Booking, Integer> {
 
     List<Booking> searchBookings(Integer searchFrom, Integer searchTo, Integer propertyId);
-    List<Booking> searchBookings(Integer searchFrom, Integer searchTo, Integer propertyId, Integer bookingType);
+    List<Booking> searchOverlapBookings(Integer searchFrom, Integer searchTo, Integer propertyId);
 }

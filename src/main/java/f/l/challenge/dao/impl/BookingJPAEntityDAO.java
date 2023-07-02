@@ -5,6 +5,7 @@ import f.l.challenge.exception.EntityDoesNotExistException;
 import f.l.challenge.model.Booking;
 import f.l.challenge.repository.BookingsRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,13 +51,18 @@ public class BookingJPAEntityDAO implements BookingEntityDAO {
         return entity.get();
     }
 
+
     @Override
     public List<Booking> searchBookings(Integer searchFrom, Integer searchTo, Integer propertyId) {
         return bookingsRepository.findByDateRangeAndPropertyId(searchFrom, searchTo, propertyId);
     }
 
     @Override
-    public List<Booking> searchBookings(Integer searchFrom, Integer searchTo, Integer propertyId, Integer bookingType) {
-        return bookingsRepository.findByDateRangeAndPropertyIdAndBookingType(searchFrom, searchTo, propertyId, bookingType);
+    public List<Booking> searchOverlapBookings(Integer searchFrom, Integer searchTo, Integer propertyId) {
+        List<Booking> result = new ArrayList<>();
+        result.addAll(bookingsRepository.findByFromPropertyId(searchFrom, propertyId));
+        result.addAll(bookingsRepository.findByFromPropertyId(searchTo, propertyId));
+        return result;
     }
+
 }

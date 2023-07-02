@@ -35,7 +35,7 @@ public class BookingsEntityService implements EntityService<BookingDto, Integer>
         Booking booking = EntityMapper.INSTANCE.bookingDtoToBooking(entity);
         booking.setUser(User.builder().id(ctx.getUser()).build());
 
-        List<Booking> bookings = bookingEntityDAO.searchBookings(ctx.getSearchFrom(), ctx.getSearchTo(), ctx.getPropertyId(), booking.getBookingType());
+        List<Booking> bookings = bookingEntityDAO.searchOverlapBookings(booking.getFromDate(), booking.getToDate(), booking.getProperty().getId());
 
         if ((!bookings.isEmpty() && entity.getBookingType() == BOOKING)
                 || (!bookings.isEmpty() && entity.getBookingType() == BLOCK && bookings.stream().anyMatch(b -> b.getBookingType() == BOOKING.getValue()))) {
