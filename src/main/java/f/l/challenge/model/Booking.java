@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Booking {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "bookings_generator")
+    @SequenceGenerator(name = "bookings_generator", sequenceName = "bookings_seq", allocationSize = 1)
     private Integer id;
 
     @ManyToOne

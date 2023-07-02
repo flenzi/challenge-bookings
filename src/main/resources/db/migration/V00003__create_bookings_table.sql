@@ -3,15 +3,17 @@ CREATE TABLE booking_types (
     name VARCHAR(32)
 );
 
+create sequence bookings_seq increment by 1;
+
 CREATE TABLE bookings (
-    id INTEGER PRIMARY KEY,
+    id INT PRIMARY KEY,
     user_id INT,
-    from_date DATE,
-    to_date DATE,
+    from_date INT,
+    to_date INT,
     property_id INT,
     booking_type INT,
     FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (property_id) REFERENCES properties(id)
+    FOREIGN KEY (property_id) REFERENCES properties(id),
     FOREIGN KEY (booking_type) REFERENCES booking_types(id)
 );
 
