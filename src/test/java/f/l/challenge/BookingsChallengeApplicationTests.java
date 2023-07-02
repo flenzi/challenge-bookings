@@ -1,6 +1,7 @@
 package f.l.challenge;
 
 import f.l.challenge.dto.BookingDto;
+import f.l.challenge.dto.BookingTypeEnum;
 import f.l.challenge.service.EntityContext;
 import f.l.challenge.service.impl.BookingsEntityService;
 import org.junit.jupiter.api.Test;
@@ -50,5 +51,29 @@ public class BookingsChallengeApplicationTests {
         List<BookingDto> bookingDtos = bookingsEntityService.search(entityContext);
         assertEquals(3, bookingDtos.size());
     }
+
+    @Test
+    public void createTwoOverlappingBlocksTest() {
+        EntityContext entityContext = new EntityContext(Map.of("userId", 1));
+
+        BookingDto bookingDto1 = BookingDto.builder()
+                .propertyId(1)
+                .bookingType(BookingTypeEnum.BLOCK)
+                .fromDate(LocalDate.of(2024, 1, 1))
+                .toDate(LocalDate.of(2024, 1, 10))
+                .build();
+
+        bookingsEntityService.save(bookingDto1, entityContext);
+
+        BookingDto bookingDto2 = BookingDto.builder()
+                .propertyId(1)
+                .bookingType(BookingTypeEnum.BLOCK)
+                .fromDate(LocalDate.of(2024, 1, 5))
+                .toDate(LocalDate.of(2024, 1, 10))
+                .build();
+
+        bookingsEntityService.save(bookingDto2, entityContext);
+    }
+
 
 }

@@ -2,12 +2,17 @@ package f.l.challenge.service.impl;
 
 import f.l.challenge.dao.BookingEntityDAO;
 import f.l.challenge.dto.BookingDto;
+import f.l.challenge.exception.PropertyNotAvailableException;
 import f.l.challenge.mapper.EntityMapper;
 import f.l.challenge.model.Booking;
+import f.l.challenge.model.User;
 import f.l.challenge.service.EntityContext;
 import f.l.challenge.service.EntityService;
 
 import java.util.List;
+
+import static f.l.challenge.dto.BookingTypeEnum.BLOCK;
+import static f.l.challenge.dto.BookingTypeEnum.BOOKING;
 
 public class BookingsEntityService implements EntityService<BookingDto, Integer> {
 
@@ -28,6 +33,15 @@ public class BookingsEntityService implements EntityService<BookingDto, Integer>
     public BookingDto save(BookingDto entity,
                            EntityContext ctx) {
         Booking booking = EntityMapper.INSTANCE.bookingDtoToBooking(entity);
+        booking.setUser(User.builder().id(ctx.getUser()).build());
+
+        List<Booking> bookings = bookingEntityDAO.searchBookings(ctx.getSearchFrom(), ctx.getSearchTo(), ctx.getPropertyId(), booking.getBookingType());
+
+        if ((!bookings.isEmpty() && entity.getBookingType() == BOOKING)
+                || (!bookings.isEmpty() && entity.getBookingType() == BLOCK && bookings.stream().anyMatch(b -> b.getBookingType() == BOOKING.getValue()))) {
+            throw new PropertyNotAvailableException("There is a booking in the specified dates");
+        }
+
         Booking savedBooking = bookingEntityDAO.create(booking);
         return EntityMapper.INSTANCE.bookingToBookingDto(savedBooking);
     }

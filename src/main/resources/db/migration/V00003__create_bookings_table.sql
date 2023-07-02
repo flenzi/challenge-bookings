@@ -4,7 +4,7 @@ CREATE TABLE booking_types (
 );
 
 CREATE TABLE bookings (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     user_id INT,
     from_date DATE,
     to_date DATE,

@@ -5,7 +5,6 @@ import f.l.challenge.exception.EntityDoesNotExistException;
 import f.l.challenge.model.Booking;
 import f.l.challenge.repository.BookingsRepository;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,5 +53,10 @@ public class BookingJPAEntityDAO implements BookingEntityDAO {
     @Override
     public List<Booking> searchBookings(Integer searchFrom, Integer searchTo, Integer propertyId) {
         return bookingsRepository.findByDateRangeAndPropertyId(searchFrom, searchTo, propertyId);
+    }
+
+    @Override
+    public List<Booking> searchBookings(Integer searchFrom, Integer searchTo, Integer propertyId, Integer bookingType) {
+        return bookingsRepository.findByDateRangeAndPropertyIdAndBookingType(searchFrom, searchTo, propertyId, bookingType);
     }
 }
