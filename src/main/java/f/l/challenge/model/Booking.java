@@ -30,5 +30,7 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
+
+    private int bookingType;
 }
 

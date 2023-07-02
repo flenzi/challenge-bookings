@@ -10,7 +10,7 @@ public class BookingsChallengeApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BookingsChallengeApplication.class,
-                              args);
+                args);
     }
 
 }

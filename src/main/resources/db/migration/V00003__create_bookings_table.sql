@@ -9,10 +9,10 @@ CREATE TABLE bookings (
     from_date DATE,
     to_date DATE,
     property_id INT,
-    type_id INT,
+    booking_type INT,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (property_id) REFERENCES properties(id)
-    FOREIGN KEY (type_id) REFERENCES booking_types(id)
+    FOREIGN KEY (booking_type) REFERENCES booking_types(id)
 );
 
 CREATE INDEX idx_from_date ON bookings (from_date);

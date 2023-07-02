@@ -1,6 +1,7 @@
 package f.l.challenge.mapper;
 
 import f.l.challenge.dto.BookingDto;
+import f.l.challenge.dto.BookingTypeEnum;
 import f.l.challenge.model.Booking;
 import f.l.challenge.model.Property;
 import org.junit.jupiter.api.Test;
@@ -17,35 +18,39 @@ public class EntityMapperTest {
     int bookingId = 1;
     int propertyId = 2;
     LocalDate fromDate = LocalDate.of(2023,
-                                      6,
-                                      1);
+            6,
+            1);
     LocalDate toDate = LocalDate.of(2023,
-                                    6,
-                                    10);
+            6,
+            10);
 
     @Test
     public void testToDto() {
         Booking booking = Booking.builder()
-                                 .id(bookingId)
-                                 .fromDate(fromDate)
-                                 .toDate(toDate)
-                                 .property(Property.builder()
-                                                   .id(propertyId)
-                                                   .build())
-                                 .build();
+                .id(bookingId)
+                .fromDate(fromDate)
+                .toDate(toDate)
+                .property(Property.builder()
+                        .id(propertyId)
+                        .build())
+                .bookingType(1)
+                .build();
 
 
         BookingDto bookingDto = entityMapper.bookingToBookingDto(booking);
 
         assertEquals(bookingId,
-                     bookingDto.getId());
+                bookingDto.getId());
         assertEquals(fromDate,
-                     bookingDto.getFromDate());
+                bookingDto.getFromDate());
         assertEquals(toDate,
-                     bookingDto.getToDate());
+                bookingDto.getToDate());
 
         assertEquals(propertyId,
-                     bookingDto.getPropertyId());
+                bookingDto.getPropertyId());
+
+        assertEquals(BookingTypeEnum.BLOCK,
+                bookingDto.getBookingType());
 
     }
 
@@ -53,22 +58,25 @@ public class EntityMapperTest {
     public void testFromDto() {
 
         BookingDto bookingDto = BookingDto.builder()
-                                          .id(bookingId)
-                                          .fromDate(fromDate)
-                                          .toDate(toDate)
-                                          .propertyId(propertyId)
-                                          .build();
+                .id(bookingId)
+                .fromDate(fromDate)
+                .toDate(toDate)
+                .propertyId(propertyId)
+                .bookingType(BookingTypeEnum.BLOCK)
+                .build();
 
         Booking booking = entityMapper.bookingDtoToBooking(bookingDto);
 
         assertEquals(bookingId,
-                     booking.getId());
+                booking.getId());
         assertEquals(fromDate,
-                     booking.getFromDate());
+                booking.getFromDate());
         assertEquals(toDate,
-                     booking.getToDate());
+                booking.getToDate());
         assertEquals(propertyId,
-                     booking.getProperty()
-                            .getId());
+                booking.getProperty()
+                        .getId());
+        assertEquals(1,
+                booking.getBookingType());
     }
 }

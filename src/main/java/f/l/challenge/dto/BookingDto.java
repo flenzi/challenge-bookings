@@ -12,5 +12,6 @@ public class BookingDto {
     private LocalDate fromDate;
     private LocalDate toDate;
     private int propertyId;
+    private BookingTypeEnum bookingType;
 }
 
