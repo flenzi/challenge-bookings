@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:sqlite:memory:mydb.sqlite
+    username: sa
+    password: sa
+    driverClassName: org.sqlite.JDBC
+  jpa:
+    spring.jpa.database-platform: org.hibernate.community.dialect.SQLiteDialect
+  flyway:
+    baseline-on-migrate: true
+
+hibernate:
+  show_sql: true
+  hbm2ddl:
+    auto: create-drop
