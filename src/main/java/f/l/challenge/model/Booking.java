@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @Builder
 @Entity
@@ -23,9 +21,9 @@ public class Booking {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    private LocalDate fromDate;
+    private Integer fromDate;
 
-    private LocalDate toDate;
+    private Integer toDate;
 
     @ManyToOne
     @JoinColumn(name = "property_id", nullable = false)

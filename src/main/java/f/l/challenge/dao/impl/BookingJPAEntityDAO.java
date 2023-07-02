@@ -1,13 +1,15 @@
 package f.l.challenge.dao.impl;
 
-import f.l.challenge.dao.EntityDAO;
+import f.l.challenge.dao.BookingEntityDAO;
 import f.l.challenge.exception.EntityDoesNotExistException;
 import f.l.challenge.model.Booking;
 import f.l.challenge.repository.BookingsRepository;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
-public class BookingJPAEntityDAO implements EntityDAO<Booking, Integer> {
+public class BookingJPAEntityDAO implements BookingEntityDAO {
 
     private final BookingsRepository bookingsRepository;
 
@@ -47,5 +49,10 @@ public class BookingJPAEntityDAO implements EntityDAO<Booking, Integer> {
         Optional<Booking> entity = bookingsRepository.findById(entityId);
         bookingsRepository.deleteById(entityId);
         return entity.get();
+    }
+
+    @Override
+    public List<Booking> searchBookings(Integer searchFrom, Integer searchTo, Integer propertyId) {
+        return bookingsRepository.findByDateRangeAndPropertyId(searchFrom, searchTo, propertyId);
     }
 }

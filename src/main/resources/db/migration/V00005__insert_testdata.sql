@@ -9,7 +9,9 @@ INSERT INTO properties (id, name, city) VALUES
     (3, 'The best place to relax', 'Oakland');
 
 
-INSERT INTO bookings (id, user_id, from_date, to_date, property_id, type_id) VALUES
-    (1, 1, '2023-07-01 00:00:00.000', '2023-07-05 00:00:00.000', 1, 1),
-    (2, 1, '2023-08-01 00:00:00.000', '2023-08-30 00:00:00.000', 2, 1);
+INSERT INTO bookings (id, user_id, from_date, to_date, property_id, booking_type) VALUES
+    (1, 1, '20230701', '20230705', 1, 1),
+    (2, 1, '20230801', '20230830', 2, 1),
+    (3, 2, '20230901', '20230902', 2, 1);
+
 

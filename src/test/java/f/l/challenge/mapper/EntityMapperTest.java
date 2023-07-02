@@ -20,16 +20,18 @@ public class EntityMapperTest {
     LocalDate fromDate = LocalDate.of(2023,
             6,
             1);
+    int fromDateInt = 20230601;
     LocalDate toDate = LocalDate.of(2023,
             6,
             10);
+    int toDateInt = 20230610;
 
     @Test
     public void testToDto() {
         Booking booking = Booking.builder()
                 .id(bookingId)
-                .fromDate(fromDate)
-                .toDate(toDate)
+                .fromDate(fromDateInt)
+                .toDate(toDateInt)
                 .property(Property.builder()
                         .id(propertyId)
                         .build())
@@ -69,9 +71,9 @@ public class EntityMapperTest {
 
         assertEquals(bookingId,
                 booking.getId());
-        assertEquals(fromDate,
+        assertEquals(fromDateInt,
                 booking.getFromDate());
-        assertEquals(toDate,
+        assertEquals(toDateInt,
                 booking.getToDate());
         assertEquals(propertyId,
                 booking.getProperty()
