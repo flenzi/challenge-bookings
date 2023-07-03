@@ -24,7 +24,7 @@ public class BookingController {
 
     @GetMapping(path = "/{bookingId}", produces = "application/json")
     public ResponseEntity<BookingDto> getEntityById(final @PathVariable("bookingId") int bookingId,
-                                                    final @RequestHeader Map<String, Object> headers) {
+                                                    final @RequestHeader Map<String, String> headers) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(bookingsEntityService.findById(bookingId,
                         new EntityContext(headers)));
@@ -32,7 +32,7 @@ public class BookingController {
 
     @PostMapping(path = "/", consumes = "application/json", produces = "application/json")
     public ResponseEntity<BookingDto> createEntity(final @RequestBody BookingDto entity,
-                                                   final @RequestHeader Map<String, Object> headers) {
+                                                   final @RequestHeader Map<String, String> headers) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(bookingsEntityService.save(entity,
                         new EntityContext(headers)));
@@ -41,7 +41,7 @@ public class BookingController {
     @DeleteMapping(path = "/{bookingId}", produces = "application/json")
     public ResponseEntity<BookingDto> deleteEntityById(
             final @PathVariable("bookingId") int bookingId,
-            final @RequestHeader Map<String, Object> headers) {
+            final @RequestHeader Map<String, String> headers) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(bookingsEntityService.remove(bookingId,
                         new EntityContext(headers)));
@@ -50,7 +50,7 @@ public class BookingController {
     @PutMapping(path = "/{bookingId}", consumes = "application/json", produces = "application/json")
     public ResponseEntity<BookingDto> updateEntity(final @PathVariable("bookingId") int bookingId,
                                                    final @RequestBody BookingDto entity,
-                                                   final @RequestHeader Map<String, Object> headers) {
+                                                   final @RequestHeader Map<String, String> headers) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(bookingsEntityService.save(bookingId,
                         entity,
@@ -58,7 +58,7 @@ public class BookingController {
     }
 
     @GetMapping(path = "/search", produces = "application/json")
-    public ResponseEntity<List<BookingDto>> searchEntities(final @RequestHeader Map<String, Object> headers,
+    public ResponseEntity<List<BookingDto>> searchEntities(final @RequestHeader Map<String, String> headers,
                                                            final @RequestParam("searchTo") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate searchTo,
                                                            final @RequestParam("searchFrom") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate searchFrom,
                                                            final @RequestParam("propertyId") int propertyId

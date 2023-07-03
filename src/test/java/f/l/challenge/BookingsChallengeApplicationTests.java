@@ -55,7 +55,7 @@ public class BookingsChallengeApplicationTests {
 
     @Test
     public void createTwoOverlappingBlocksTest() {
-        EntityContext entityContext = new EntityContext(Map.of("userId", 1));
+        EntityContext entityContext = new EntityContext(Map.of("userId", "1"));
 
         BookingDto bookingDto1 = BookingDto.builder()
                 .propertyId(99)
@@ -81,7 +81,7 @@ public class BookingsChallengeApplicationTests {
 
     @Test
     public void createBlockWhenBookingExistsTest() {
-        EntityContext entityContext = new EntityContext(Map.of("userId", 1));
+        EntityContext entityContext = new EntityContext(Map.of("userId", "1"));
 
         BookingDto bookingDto1 = BookingDto.builder()
                 .propertyId(1)

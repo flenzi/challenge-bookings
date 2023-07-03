@@ -51,7 +51,7 @@ public class EntityMapperTest {
         assertEquals(propertyId,
                 bookingDto.getPropertyId());
 
-        assertEquals(BookingTypeEnum.BLOCK,
+        assertEquals(BookingTypeEnum.BOOKING,
                 bookingDto.getBookingType());
 
     }
@@ -78,7 +78,7 @@ public class EntityMapperTest {
         assertEquals(propertyId,
                 booking.getProperty()
                         .getId());
-        assertEquals(1,
+        assertEquals(2,
                 booking.getBookingType());
     }
 }

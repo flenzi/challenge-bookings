@@ -8,17 +8,17 @@ import java.util.Map;
 
 public class EntityContext {
 
-    private final Map<String, Object> args;
+    private final Map<String, String> args;
     private Integer searchFrom;
     private Integer searchTo;
     private Integer propertyId;
 
-    public EntityContext(Map<String, Object> args) {
+    public EntityContext(Map<String, String> args) {
         this.args = new HashMap<>(args);
     }
 
     public Integer getUser() {
-        return (int) args.get("userId");
+        return args.containsKey("userid") ? Integer.valueOf(args.get("userid")) : null;
     }
 
     public Integer getSearchFrom() {
